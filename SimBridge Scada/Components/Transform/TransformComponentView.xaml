@@ -1,0 +1,18 @@
+<UserControl x:Class="SimBridge_Scada.Views.Components.Transform.TransformComponentView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <StackPanel>
+  <Grid>
+   <Grid.Resources><Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}"><Setter Property="Padding" Value="5,5"/><Setter Property="Margin" Value="0,3"/><Setter Property="MinWidth" Value="32"/></Style></Grid.Resources>
+   <Grid.ColumnDefinitions><ColumnDefinition Width="76"/><ColumnDefinition Width="18"/><ColumnDefinition/><ColumnDefinition Width="18"/><ColumnDefinition/></Grid.ColumnDefinitions>
+   <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+   <TextBlock Text="Позиция" FontSize="12"/><TextBlock Grid.Column="1" Text="X" Foreground="#DB7777"/>
+   <TextBox Grid.Column="2" Text="{Binding X, UpdateSourceTrigger=LostFocus}"/>
+   <TextBlock Grid.Column="3" Text="Y" Foreground="#73C991" HorizontalAlignment="Center"/><TextBox Grid.Column="4" Text="{Binding Y, UpdateSourceTrigger=LostFocus}"/>
+   <TextBlock Grid.Row="1" Text="Вращение" FontSize="12"/><TextBlock Grid.Row="1" Grid.Column="1" Text="Z" Foreground="#6B9BFA"/>
+   <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Text="{Binding Rotation, UpdateSourceTrigger=LostFocus}" ToolTip="Угол в градусах"/>
+   <TextBlock Grid.Row="2" Text="Размер" FontSize="12"/><TextBlock Grid.Row="2" Grid.Column="1" Text="W" Foreground="#DB7777"/>
+   <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Width, UpdateSourceTrigger=LostFocus}"/>
+   <TextBlock Grid.Row="2" Grid.Column="3" Text="H" Foreground="#73C991" HorizontalAlignment="Center"/><TextBox Grid.Row="2" Grid.Column="4" Text="{Binding Height, UpdateSourceTrigger=LostFocus}"/>
+  </Grid>
+  <CheckBox Content="Заблокировать перемещение" IsChecked="{Binding IsLocked}" Margin="0,10,0,0"/>
+ </StackPanel>
+</UserControl>

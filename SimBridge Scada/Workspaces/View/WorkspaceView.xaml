@@ -1,0 +1,24 @@
+<UserControl x:Class="SimBridge_Scada.Views.WorkspaceView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:SimBridge_Scada.Controls" xmlns:menus="clr-namespace:SimBridge_Scada.Shared.Menus">
+ <UserControl.Resources><controls:ComponentVisualTemplateSelector x:Key="ComponentVisualSelector"/></UserControl.Resources>
+ <controls:WorkspaceViewport HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="False" Background="#262626" Focusable="True">
+  <controls:SchematicSurface ItemsSource="{Binding Elements}" Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}" Background="{StaticResource DotGrid}" Focusable="True" HorizontalAlignment="Left" VerticalAlignment="Top">
+      <controls:SchematicSurface.LayoutTransform><ScaleTransform ScaleX="{Binding Zoom}" ScaleY="{Binding Zoom}"/></controls:SchematicSurface.LayoutTransform>
+      <controls:SchematicSurface.ItemsPanel><ItemsPanelTemplate><Canvas/></ItemsPanelTemplate></controls:SchematicSurface.ItemsPanel>
+      <controls:SchematicSurface.ItemContainerStyle><Style TargetType="ContentPresenter">
+       <Setter Property="Canvas.Left" Value="{Binding WorldX}"/><Setter Property="Canvas.Top" Value="{Binding WorldY}"/><Setter Property="RenderTransformOrigin" Value="0.5,0.5"/><Setter Property="RenderTransform"><Setter.Value><RotateTransform Angle="{Binding WorldRotation}"/></Setter.Value></Setter><Setter Property="Width" Value="{Binding Width}"/><Setter Property="Height" Value="{Binding Height}"/>
+       <Setter Property="Visibility" Value="{Binding EffectiveIsVisible, Converter={StaticResource BoolVisibility}}"/>
+       <Style.Triggers><DataTrigger Binding="{Binding EffectiveIsEnabled}" Value="False"><Setter Property="Opacity" Value="0.45"/></DataTrigger><DataTrigger Binding="{Binding IsSelected}" Value="True"><Setter Property="Panel.ZIndex" Value="1"/></DataTrigger></Style.Triggers>
+      </Style></controls:SchematicSurface.ItemContainerStyle>
+      <controls:SchematicSurface.ItemTemplate><DataTemplate><Border BorderThickness="1" CornerRadius="5" menus:LeftClickMenu.IsEnabled="True">
+       <Border.Style><Style TargetType="Border"><Setter Property="Background" Value="Transparent"/><Setter Property="BorderBrush" Value="Transparent"/><Style.Triggers><DataTrigger Binding="{Binding EffectiveIsEnabled}" Value="False"><Setter Property="Opacity" Value="0.45"/></DataTrigger><DataTrigger Binding="{Binding IsSelected}" Value="True"><Setter Property="BorderBrush" Value="#6B9BFA"/><Setter Property="Background" Value="#183571B5"/></DataTrigger></Style.Triggers></Style></Border.Style>
+              <ItemsControl ItemsSource="{Binding Components}" ItemTemplateSelector="{StaticResource ComponentVisualSelector}" IsHitTestVisible="False">
+        <ItemsControl.ItemsPanel><ItemsPanelTemplate><Grid/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+        <ItemsControl.ItemContainerStyle><Style TargetType="ContentPresenter"><Setter Property="HorizontalAlignment" Value="Stretch"/><Setter Property="VerticalAlignment" Value="Stretch"/></Style></ItemsControl.ItemContainerStyle>
+       </ItemsControl>
+      </Border></DataTemplate></controls:SchematicSurface.ItemTemplate>
+     </controls:SchematicSurface>
+ </controls:WorkspaceViewport>
+</UserControl>
+
+
+

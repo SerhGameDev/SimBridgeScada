@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:c="clr-namespace:SimBridge_Scada.ViewModels.Components">
+ <DataTemplate x:Key="Visual.ImageComponentViewModel"><Image Source="{Binding Source}" Stretch="Uniform" Opacity="{Binding Opacity}" IsHitTestVisible="False"/></DataTemplate>
+ <DataTemplate x:Key="Visual.TextComponentViewModel"><TextBlock Text="{Binding DisplayText}" FontSize="{Binding FontSize}" Foreground="{Binding Foreground}" FontWeight="{Binding Weight}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" IsHitTestVisible="False"/></DataTemplate>
+ <DataTemplate x:Key="Visual.SymbolComponentViewModel">
+  <ContentControl IsHitTestVisible="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+   <ContentControl.Style><Style TargetType="ContentControl"><Setter Property="Content" Value="{Binding Owner}"/><Setter Property="ContentTemplate" Value="{StaticResource PumpSymbolVisual}"/><Style.Triggers>
+    <DataTrigger Binding="{Binding Kind}" Value="{x:Static c:SymbolKind.Valve}"><Setter Property="ContentTemplate" Value="{StaticResource ValveSymbolVisual}"/></DataTrigger>
+    <DataTrigger Binding="{Binding Kind}" Value="{x:Static c:SymbolKind.Tank}"><Setter Property="ContentTemplate" Value="{StaticResource TankSymbolVisual}"/></DataTrigger>
+   </Style.Triggers></Style></ContentControl.Style>
+  </ContentControl>
+ </DataTemplate>
+</ResourceDictionary>
+

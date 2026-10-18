@@ -1,0 +1,15 @@
+<UserControl x:Class="SimBridge_Scada.Views.TextComponentView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <StackPanel>
+  <CheckBox Content="Синхронизация с Modbus" IsChecked="{Binding SyncWithModbus}"/>
+  <StackPanel Visibility="{Binding SyncWithModbus,Converter={StaticResource BoolVisibility}}" Margin="0,6,0,12">
+   <TextBlock Text="Индекс переменной Modbus" Margin="0,0,0,6"/>
+   <ComboBox ItemsSource="{Binding ModbusVariables}" DisplayMemberPath="DisplayLabel" SelectedValuePath="Index" SelectedValue="{Binding ModbusVariableIndex,Mode=OneWay}" SelectionChanged="VariableSelected" Foreground="#15171B" MinHeight="28"/>
+   <TextBlock Text="{Binding ModbusStatus}" Foreground="#9DA0A8" FontSize="11" TextWrapping="Wrap" Margin="0,6,0,0"/>
+  </StackPanel>
+  <TextBlock Text="Содержимое" Margin="0,0,0,6"/><TextBox Text="{Binding Text,UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" MinHeight="60" TextWrapping="Wrap"/>
+  <TextBlock Text="Размер шрифта" Margin="0,8,0,6"/><TextBox Text="{Binding FontSize}"/>
+  <TextBlock Text="Цвет (#RRGGBB)" Margin="0,8,0,6"/><TextBox Text="{Binding Color,UpdateSourceTrigger=PropertyChanged}"/>
+  <CheckBox Content="Жирный" IsChecked="{Binding Bold}"/>
+ </StackPanel>
+</UserControl>
+

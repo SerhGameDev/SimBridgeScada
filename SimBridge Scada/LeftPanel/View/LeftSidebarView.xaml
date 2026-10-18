@@ -1,0 +1,1 @@
+<UserControl x:Class="SimBridge_Scada.Views.LeftSidebarView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:views="clr-namespace:SimBridge_Scada.Views"><views:SidebarView/></UserControl>

@@ -1,0 +1,8 @@
+<UserControl x:Class="SimBridge_Scada.Views.ElementLibraryView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="12"><ItemsControl ItemsSource="{Binding Items}"><ItemsControl.ItemTemplate><DataTemplate>
+  <Button Command="{Binding AddCommand}" HorizontalContentAlignment="Left" Margin="0,0,0,8" Padding="10,9">
+   <StackPanel Orientation="Horizontal"><Image Source="{Binding IconPath, Converter={StaticResource IconPathConverter}}" Width="18" Height="18" Margin="0,0,10,0"/><TextBlock Text="{Binding Title}"/></StackPanel>
+  </Button>
+ </DataTemplate></ItemsControl.ItemTemplate></ItemsControl></ScrollViewer>
+</UserControl>
+

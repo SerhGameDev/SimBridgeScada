@@ -1,0 +1,7 @@
+<Application x:Class="SimBridge_Scada.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" StartupUri="Shell/View/MainWindow.xaml">
+ <Application.Resources><ResourceDictionary><ResourceDictionary.MergedDictionaries><ResourceDictionary Source="Themes/EditorTheme.xaml"/><ResourceDictionary Source="Shared/Menus/View/ActionMenuTheme.xaml"/><ResourceDictionary Source="Workspaces/Elements/ElementTemplates.xaml"/><ResourceDictionary Source="Components/Common/ComponentVisuals.xaml"/></ResourceDictionary.MergedDictionaries></ResourceDictionary></Application.Resources>
+</Application>
+
+
+
+

@@ -1,0 +1,13 @@
+<Window x:Class="SimBridge_Scada.Views.RenameWorkspaceWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="Переименовать мнемосхему" Width="440" Height="220" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Background="#2B2D30" Foreground="#DFE1E5" FontFamily="Segoe UI" FontSize="13" ShowInTaskbar="False">
+ <Grid Margin="20">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <TextBlock Text="Название мнемосхемы" Margin="0,0,0,10"/>
+  <TextBox x:Name="NameField" Grid.Row="1" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" MaxLength="256"/>
+  <TextBlock Grid.Row="2" Text="{Binding Error}" Foreground="#E58B8B" FontSize="12" VerticalAlignment="Top" TextWrapping="Wrap"/>
+  <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+   <Button Content="Отмена" Command="{Binding CancelCommand}" IsCancel="True" Margin="0,0,8,0"/>
+   <Button Content="Переименовать" Command="{Binding ConfirmCommand}" IsDefault="True"/>
+  </StackPanel>
+ </Grid>
+</Window>

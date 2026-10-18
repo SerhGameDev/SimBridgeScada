@@ -1,0 +1,36 @@
+<Window x:Class="SimBridge_Scada.Modbus.View.ModbusWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:vm="clr-namespace:SimBridge_Scada.Modbus.ViewModel"
+ Title="Modbus TCP — переменные" Width="1120" Height="640" MinWidth="960" MinHeight="480" Background="#262626" Foreground="#DFE1E5" FontFamily="Segoe UI" FontSize="13" WindowStartupLocation="CenterOwner" Validation.Error="ValidationError">
+ <Window.Resources>
+  <Style TargetType="DataGrid"><Setter Property="Background" Value="#262626"/><Setter Property="Foreground" Value="#DFE1E5"/><Setter Property="RowBackground" Value="#2B2D30"/><Setter Property="AlternatingRowBackground" Value="#303236"/><Setter Property="BorderBrush" Value="#43454A"/><Setter Property="HorizontalGridLinesBrush" Value="#43454A"/><Setter Property="VerticalGridLinesBrush" Value="#43454A"/><Setter Property="HeadersVisibility" Value="Column"/><Setter Property="RowHeight" Value="32"/></Style>
+  <Style TargetType="DataGridColumnHeader"><Setter Property="Background" Value="#393B40"/><Setter Property="Foreground" Value="#DFE1E5"/><Setter Property="Padding" Value="8"/><Setter Property="BorderBrush" Value="#55585E"/><Setter Property="BorderThickness" Value="0,0,1,1"/></Style>
+  <Style TargetType="DataGridCell"><Setter Property="BorderThickness" Value="0"/><Setter Property="Padding" Value="4"/><Style.Triggers><Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#2E4361"/><Setter Property="Foreground" Value="#FFFFFF"/></Trigger></Style.Triggers></Style>
+  <Style TargetType="ComboBox"><Setter Property="Foreground" Value="#16181C"/></Style>
+ </Window.Resources>
+ <Grid Margin="16"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <WrapPanel>
+   <StackPanel Width="190" Margin="0,0,12,0"><TextBlock Text="IP-адрес" Margin="0,0,0,6"/><TextBox Text="{Binding Service.Host,UpdateSourceTrigger=PropertyChanged}"/></StackPanel>
+   <StackPanel Width="75" Margin="0,0,12,0"><TextBlock Text="Порт" Margin="0,0,0,6"/><TextBox Text="{Binding Service.Port,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}"/></StackPanel>
+   <StackPanel Width="75" Margin="0,0,12,0"><TextBlock Text="Unit ID" Margin="0,0,0,6"/><TextBox Text="{Binding Service.UnitId,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}"/></StackPanel>
+   <StackPanel Width="100" Margin="0,0,12,0"><TextBlock Text="Период, мс" Margin="0,0,0,6"/><TextBox Text="{Binding Service.PollIntervalMs,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}"/></StackPanel>
+   <StackPanel Width="100" Margin="0,0,12,0"><TextBlock Text="Таймаут, мс" Margin="0,0,0,6"/><TextBox Text="{Binding Service.TimeoutMs,UpdateSourceTrigger=PropertyChanged,NotifyOnValidationError=True}"/></StackPanel>
+   <Button Content="Тест" Command="{Binding TestCommand}" VerticalAlignment="Center" Margin="0,12,8,0"/>
+   <Button Content="Начать опрос" Command="{Binding StartCommand}" VerticalAlignment="Center" Margin="0,12,8,0"/>
+   <Button Content="Остановить" Command="{Binding StopCommand}" VerticalAlignment="Center" Margin="0,12,0,0"/>
+  </WrapPanel>
+  <TextBlock Grid.Row="1" Text="{Binding Service.Status}" Foreground="#9DA0A8" Margin="0,6,0,12" TextWrapping="Wrap"/>
+  <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,10"><Button Content="＋  Переменная" Command="{Binding AddCommand}" Margin="0,0,8,0"/><Button Content="Удалить" Command="{Binding RemoveCommand}"/></StackPanel>
+  <DataGrid x:Name="VariablesGrid" Grid.Row="3" ItemsSource="{Binding Service.Variables}" SelectedItem="{Binding SelectedVariable}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="FullRow" SelectionMode="Single">
+   <DataGrid.Columns>
+    <DataGridTextColumn Header="Индекс" Width="65" Binding="{Binding Index,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+    <DataGridComboBoxColumn Header="Тип данных" Width="110" ItemsSource="{x:Static vm:ModbusChoices.DataTypes}" SelectedItemBinding="{Binding DataType,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+    <DataGridComboBoxColumn Header="Область" Width="150" ItemsSource="{x:Static vm:ModbusChoices.Areas}" SelectedItemBinding="{Binding Area,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+    <DataGridTextColumn Header="Адрес (с 0)" Width="95" Binding="{Binding Address,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True,NotifyOnValidationError=True}"/>
+    <DataGridComboBoxColumn Header="Порядок байтов" Width="125" ItemsSource="{x:Static vm:ModbusChoices.ByteOrders}" SelectedItemBinding="{Binding ByteOrder,UpdateSourceTrigger=PropertyChanged}"/>
+    <DataGridTextColumn Header="Комментарий" Width="*" MinWidth="140" Binding="{Binding Comment,UpdateSourceTrigger=PropertyChanged}"/>
+    <DataGridTextColumn Header="Значение" Width="110" IsReadOnly="True" Binding="{Binding Value}"/>
+    <DataGridTextColumn Header="Состояние" Width="120" IsReadOnly="True" Binding="{Binding Status}"/>
+   </DataGrid.Columns>
+  </DataGrid>
+  <TextBlock Grid.Row="4" Text="Адреса — смещения 0–65535, не обозначения 40001. Boolean для Coils/DiscreteInputs; числовые типы — для регистров. Опрос включается вручную." Foreground="#81858C" TextWrapping="Wrap" Margin="0,12,0,0" FontSize="12"/>
+ </Grid>
+</Window>
